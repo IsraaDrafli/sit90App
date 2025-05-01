@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sit90/data.dart';
+
+import 'calibration.dart';
 
 class StartPage extends StatelessWidget {
   const StartPage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final CalibrationController controller = Get.put(CalibrationController());
     return Stack(
       children: [
         Positioned.fill(
@@ -47,7 +51,19 @@ class StartPage extends StatelessWidget {
                         color: Colors.white),
                   ),
                   Spacer(),
-                  SetButton(() {Navigator.pushNamed(context, '/second');}, 'Get started')
+                  SetButton(() {
+
+                    
+                      final currentStatus = controller.status.value;
+                      if(currentStatus == "success"){
+                         Navigator.pushNamed(context, '/home');
+                      }else{
+                        Navigator.pushNamed(context, '/second');
+                      }
+
+                    
+                   
+                    }, 'Get started')
                 ],
               ),
             ),

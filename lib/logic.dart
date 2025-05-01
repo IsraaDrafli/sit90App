@@ -24,9 +24,9 @@ class PostureController extends GetxController {
     DateTime now = DateTime.now();
     int currentWeekday = now.weekday; // 1=Monday, 7=Sunday
     DateTime startOfWeek =
-        now.subtract(Duration(days: currentWeekday - 1)); // Monday
+        now.subtract(Duration(days: currentWeekday)); // Sunday
 
-    String userId = "user123"; // TODO: Replace with your dynamic user ID
+    String userId = "user123"; 
 
     for (int i = 0; i < 7; i++) {
       DateTime day = startOfWeek.add(Duration(days: i));

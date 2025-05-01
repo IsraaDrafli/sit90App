@@ -1,0 +1,2 @@
+C:/Users/HP/Desktop/sit90/sit90/android/app/.cxx/RelWithDebInfo/v4u5552b/arm64-v8a/CMakeFiles/edit_cache.dir
+C:/Users/HP/Desktop/sit90/sit90/android/app/.cxx/RelWithDebInfo/v4u5552b/arm64-v8a/CMakeFiles/rebuild_cache.dir

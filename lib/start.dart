@@ -6,70 +6,66 @@ import 'package:sit90/data.dart';
 import 'calibration.dart';
 
 class StartPage extends StatelessWidget {
-  const StartPage({super.key});
-
+  StartPage({super.key});
+  final CalibrationController controller = Get.put(CalibrationController());
   @override
   Widget build(BuildContext context) {
-    final CalibrationController controller = Get.put(CalibrationController());
-    return Stack(
-      children: [
-        Positioned.fill(
-          child: Image.asset(
-            'Image/START.png',
-            fit: BoxFit.fill,
-          ),
-        ),
-        Scaffold(
-          backgroundColor: Colors.transparent,
-          body: Padding(
-            padding: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
-            child: Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Text.rich(TextSpan(children: [
-                    TextSpan(
-                      text: 'Sit',
-                      style: GoogleFonts.poppins(
-                          fontSize: 25, fontWeight: FontWeight.bold),
-                    ),
-                    TextSpan(
-                      text: '90',
-                      style: GoogleFonts.poppins(
-                          fontSize: 25,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white),
-                    )
-                  ])),
-                  SizedBox(height: 25),
-                  Text(
-                    textAlign: TextAlign.center,
-                    'You will have everything you need to reach your personal fitness goals - for free!',
-                    style: GoogleFonts.poppins(
-                        fontSize: 22,
-                        fontWeight: FontWeight.w600,
-                        color: Colors.white),
-                  ),
-                  Spacer(),
-                  SetButton(() {
-
-                    
-                      final currentStatus = controller.status.value;
-                      if(currentStatus == "success"){
-                         Navigator.pushNamed(context, '/home');
-                      }else{
-                        Navigator.pushNamed(context, '/second');
-                      }
-
-                    
-                   
-                    }, 'Get started')
-                ],
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: Colors.transparent,
+        body: Stack(
+          children: [
+            Positioned.fill(
+              child: Image.asset(
+                'Image/START.png',
+                fit: BoxFit.fill,
               ),
             ),
-          ),
-        )
-      ],
+            Padding(
+              padding: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+              child: Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Text.rich(TextSpan(children: [
+                      TextSpan(
+                        text: 'Sit',
+                        style: GoogleFonts.poppins(
+                            fontSize: 25, fontWeight: FontWeight.bold),
+                      ),
+                      TextSpan(
+                        text: '90',
+                        style: GoogleFonts.poppins(
+                            fontSize: 25,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white),
+                      )
+                    ])),
+                    SizedBox(height: 25),
+                    Text(
+                      textAlign: TextAlign.center,
+                      'You will have everything you need to reach your personal fitness goals - for free!',
+                      style: GoogleFonts.poppins(
+                          fontSize: 22,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.white),
+                    ),
+                    Spacer(),
+                    SetButton(() {
+                      final currentStatus = controller.status.value;
+                      if (currentStatus == "success") {
+                        Navigator.pushNamed(context, '/home');
+                      } else {
+                        Navigator.pushNamed(context, '/second');
+                      }
+                    }, 'Get started')
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

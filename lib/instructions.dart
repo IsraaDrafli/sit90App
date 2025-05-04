@@ -56,10 +56,6 @@ class instructionsPage extends StatelessWidget {
                   width: 22,
                 ),
                 pic(),
-                SizedBox(
-                  width: 22,
-                ),
-                pic(),
               ],
             ),
             SizedBox(
@@ -77,11 +73,6 @@ class instructionsPage extends StatelessWidget {
                   ),
                   Instruction('Center the sensor',
                       'Ensure the sensor is \n centered on your spin\n and facing outwards'),
-                  SizedBox(
-                    width: 21,
-                  ),
-                  Instruction('Check fit and\n alignment',
-                      'Sit uprigth with feet flat\n and knees at 90*'),
                 ],
               ),
             ),

@@ -9,46 +9,48 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final bool isoffline = true;
-    return GradientScaffold(
-      child: Padding(
-        padding: EdgeInsets.only(left: 19, right: 19, top: 19),
-        child: SingleChildScrollView(
-          child: Column(children: [
-            HomeWidg(),
-            isoffline
-                ? mycontainer(
-                    Color(0xFF9BCF53), 'Track your poster improvement', () {
-                    Get.find<Controller>().changePage(1);
-                  }, 'See Statistics')
-                : offline(),
-            SizedBox(
-              height: 24,
-            ),
-            Row(
-              children: [
-                Text(
-                  'Exercices',
-                  style: GoogleFonts.poppins(
-                      fontSize: 20, fontWeight: FontWeight.w600),
-                ),
-                Spacer(),
-                TextButton(
-                    onPressed: () {},
-                    child: Text(
-                      'See all',
-                      style: GoogleFonts.poppins(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w600,
-                          color: Color(0xff9FA2AE)),
-                    ))
-              ],
-            ),
-            mycontainer(theblue, 'First set of exercises', () {}, 'Start'),
-            mycontainer(theblue, 'Second set of exercises', () {}, 'Start'),
-            SizedBox(
-              height: 19,
-            )
-          ]),
+    return SafeArea(
+      child: GradientScaffold(
+        child: Padding(
+          padding: EdgeInsets.only(left: 19, right: 19, top: 19),
+          child: SingleChildScrollView(
+            child: Column(children: [
+              HomeWidg(),
+              isoffline
+                  ? mycontainer(
+                      Color(0xFF9BCF53), 'Track your poster improvement', () {
+                      Get.find<Controller>().changePage(1);
+                    }, 'See Statistics')
+                  : offline(),
+              SizedBox(
+                height: 24,
+              ),
+              Row(
+                children: [
+                  Text(
+                    'Exercices',
+                    style: GoogleFonts.poppins(
+                        fontSize: 20, fontWeight: FontWeight.w600),
+                  ),
+                  Spacer(),
+                  TextButton(
+                      onPressed: () {},
+                      child: Text(
+                        'See all',
+                        style: GoogleFonts.poppins(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w600,
+                            color: Color(0xff9FA2AE)),
+                      ))
+                ],
+              ),
+              mycontainer(theblue, 'First set of exercises', () {}, 'Start'),
+              mycontainer(theblue, 'Second set of exercises', () {}, 'Start'),
+              SizedBox(
+                height: 19,
+              )
+            ]),
+          ),
         ),
       ),
     );

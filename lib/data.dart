@@ -43,7 +43,7 @@ class REcontainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: MediaQuery.of(context).size.width * 0.29,
+      width: MediaQuery.of(context).size.width * 0.26,
       height: 8,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(5),

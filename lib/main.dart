@@ -9,29 +9,34 @@ import 'package:sit90/start.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
-    options: FirebaseOptions(
-      apiKey: 'AIzaSyB81-Ngw-DOixiNol-74hsw1BhQZY2v3Zw',
-      appId: '1:601599816160:web:21e42cd19d0723290b3b85',
-      messagingSenderId: '601599816160',
-      projectId: 'sit90-a4cf5',
-      authDomain: 'sit90-a4cf5.firebaseapp.com',
-      storageBucket: 'sit90-a4cf5.firebasestorage.app',
-      databaseURL: 'https://sit90-a4cf5-default-rtdb.firebaseio.com',
-    ),
-  );
-  runApp(MyApp());
+  try {
+    await Firebase.initializeApp(
+      options: FirebaseOptions(
+        apiKey: 'AIzaSyB81-Ngw-DOixiNol-74hsw1BhQZY2v3Zw',
+        appId: '1:601599816160:web:21e42cd19d0723290b3b85',
+        messagingSenderId: '601599816160',
+        projectId: 'sit90-a4cf5',
+        authDomain: 'sit90-a4cf5.firebaseapp.com',
+        storageBucket: 'sit90-a4cf5.firebasestorage.app',
+        databaseURL: 'https://sit90-a4cf5-default-rtdb.firebaseio.com',
+      ),
+    );
+    print("Firebase initialized successfully.");
+  } catch (e) {
+    print("Error initializing Firebase: $e");
+  }
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  MyApp({super.key});
+ const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
         debugShowCheckedModeBanner: false, title: 'Sit90',
+        home: StartPage(),
         routes: {
-        '/': (context) => StartPage(),
         '/second': (context) => PairingPage(),
         '/home': (context) => MainPage(),
         '/stat': (context) => ChartsPage(),

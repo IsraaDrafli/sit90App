@@ -13,7 +13,10 @@ class PostureController extends GetxController {
   var postureStatement2 = ''.obs;
   var todayTotalMinutes = 0.obs;
   var todayGoodMinutes = 0.obs;
+  var yesterdayTotalMin = 0.obs;
   var todayGoodPercentage = 0.0.obs;
+  var todayesterdayPercentage = 0.0.obs;
+  bool up = true;
 
   Future<void> fetchWeeklyProgress() async {
     int totalMinutesInWeek = 0;
@@ -24,15 +27,14 @@ class PostureController extends GetxController {
     DateTime now = DateTime.now();
     int currentWeekday = now.weekday; // 1=Monday, 7=Sunday
     DateTime startOfWeek =
-        now.subtract(Duration(days: currentWeekday)); // Sunday
+        now.subtract(Duration(days: currentWeekday % 7)); // Sunday
 
-    String userId = "user123"; 
+    String userId = "user123";
 
     for (int i = 0; i < 7; i++) {
       DateTime day = startOfWeek.add(Duration(days: i));
       String dateKey = DateFormat('yyyy-MM-dd').format(day);
       String dayName = DateFormat('EEE').format(day); // Mon, Tue, etc.
-
       int goodMinutes = 0;
 
       final daySnapshot = await _database.child('users/$userId/$dateKey').get();
@@ -48,6 +50,12 @@ class PostureController extends GetxController {
       }
 
       dailyGoodMinutes[dayName] = goodMinutes;
+
+      // Only count days from Sunday up to today
+      if (day.isAfter(now)) {
+        dailyGoodMinutes[dayName] = 0;
+        continue;
+      }
     }
 
     if (totalMinutesInWeek > 0) {
@@ -65,10 +73,12 @@ class PostureController extends GetxController {
   Future<void> fetchTodayData(String userId) async {
     DateTime now = DateTime.now();
     String todayKey = DateFormat('yyyy-MM-dd').format(now);
+    DateTime yesterday = DateTime.now().subtract(Duration(days: 1));
+    String yesterdayKey = DateFormat('yyyy-MM-dd').format(yesterday);
 
-    todayTotalMinutes.value = 0;
     todayGoodMinutes.value = 0;
-
+    final yesterdaySnapshot =
+        await _database.child('users/$userId/$yesterdayKey').get();
     final todaySnapshot =
         await _database.child('users/$userId/$todayKey').get();
 
@@ -80,6 +90,26 @@ class PostureController extends GetxController {
         }
       }
     }
+    if (yesterdaySnapshot.exists) {
+      for (final timeEntry in yesterdaySnapshot.children) {
+        yesterdayTotalMin++;
+      }
+    }
+    if (yesterdayTotalMin > 0) {
+      if (todayTotalMinutes.value >= yesterdayTotalMin.value) {
+        todayesterdayPercentage.value =
+            (yesterdayTotalMin.value / todayTotalMinutes.value) * 100;
+
+        up = true;
+      } else {
+        todayesterdayPercentage.value =
+            (todayTotalMinutes.value / yesterdayTotalMin.value) * 100;
+
+        up = false;
+      }
+    } else {
+      todayesterdayPercentage.value = 0;
+    }
 
     if (todayTotalMinutes.value > 0) {
       todayGoodPercentage.value =
@@ -88,7 +118,7 @@ class PostureController extends GetxController {
       todayGoodPercentage.value = 0.0;
     }
 
-    // Statement 
+    // Statement
     if (todayGoodPercentage.value > 60.0) {
       postureStatement1.value = "Good";
       postureStatement2.value = "Keep it up!";
@@ -123,7 +153,15 @@ class PostureController extends GetxController {
     }
   }
 
-  Image StatmentIcon(){
+  IconData UpDownIcon() {
+    if (up) {
+      return Icons.arrow_circle_up_outlined;
+    } else {
+      return Icons.arrow_circle_down_outlined;
+    }
+  }
+
+  Image StatmentIcon() {
     if (todayGoodPercentage.value > 60.0) {
       return Image.asset('Image/gridicons_status.png'); // Good posture
     } else if (40.0 <= todayGoodPercentage.value) {

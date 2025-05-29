@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:sit90/Profile.dart';
-import 'package:sit90/charts.dart';
-import 'package:table_calendar/table_calendar.dart';
 
+import 'package:sit90/charts.dart';
+import 'package:sit90/profileScreens/profile.dart';
+import 'package:table_calendar/table_calendar.dart';
 import 'home.dart';
 
 final Color theblue = Color(0xFF57CDFF);
@@ -19,17 +19,15 @@ class Head extends StatelessWidget {
     return Row(
       children: [
         IconButton(
-            splashColor: Colors.transparent,
-            hoverColor: Colors.transparent,
-            enableFeedback: false,
-            constraints: BoxConstraints(),
-            padding: EdgeInsets.only(right: 2, left: 0),
-            onPressed: onpreesed,
-            icon: Icon(size: 32, Icons.arrow_back_rounded)),
-        Text(
-          txt,
-          style: GoogleFonts.poppins(fontSize: 20, fontWeight: FontWeight.bold),
+          splashColor: Colors.transparent,
+          hoverColor: Colors.transparent,
+          enableFeedback: false,
+          constraints: BoxConstraints(),
+          padding: EdgeInsets.only(right: 2, left: 0),
+          onPressed: onpreesed,
+          icon: Icon(size: 28, Icons.arrow_back_rounded),
         ),
+        Text(txt, style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
       ],
     );
   }
@@ -43,7 +41,7 @@ class REcontainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: MediaQuery.of(context).size.width * 0.26,
+      width: MediaQuery.of(context).size.width * 0.28,
       height: 8,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(5),
@@ -104,9 +102,10 @@ class SetButton extends StatelessWidget {
             child: Text(
               text,
               style: GoogleFonts.poppins(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white),
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+              ),
             ),
           ),
         ),
@@ -125,45 +124,59 @@ class HomeWidg extends StatelessWidget {
       children: [
         Row(
           children: [
-            Text.rich(TextSpan(children: [
+            Text.rich(
               TextSpan(
-                text: 'Sit',
-                style: GoogleFonts.poppins(
-                    fontSize: 20, fontWeight: FontWeight.bold),
+                children: [
+                  TextSpan(
+                    text: 'Sit',
+                    style: GoogleFonts.poppins(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  TextSpan(
+                    text: '90',
+                    style: GoogleFonts.poppins(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: theblue,
+                    ),
+                  ),
+                ],
               ),
-              TextSpan(
-                text: '90',
-                style: GoogleFonts.poppins(
-                    fontSize: 20, fontWeight: FontWeight.bold, color: theblue),
-              )
-            ])),
+            ),
             Spacer(),
             IconButton(
-                onPressed: () {},
-                icon: Image.asset(
-                  notification
-                      ? 'Image/notification.png'
-                      : 'Image/notification1.png',
-                  width: 24,
-                  height: 24,
-                  fit: BoxFit.contain,
-                  filterQuality: FilterQuality.high,
-                ))
+              onPressed: () {
+                Navigator.pushNamed(context, '/profile');
+              },
+              icon: ClipOval(
+                child: Image.asset(
+                  'image/isradrf.jpg',
+                  height: 45,
+                  width: 45,
+                  fit: BoxFit.cover,
+                ),
+              ),
+              iconSize: 45,
+            ),
           ],
         ),
         Obx(
           () => TableCalendar(
             daysOfWeekStyle: const DaysOfWeekStyle(
               weekdayStyle: TextStyle(
-                  fontSize: 13,
-                  fontWeight: FontWeight.w600,
-                  fontFamily: 'Poppins',
-                  color: Color.fromRGBO(126, 126, 126, 1)),
+                fontSize: 13,
+                fontWeight: FontWeight.w600,
+                fontFamily: 'Poppins',
+                color: Color.fromRGBO(126, 126, 126, 1),
+              ),
               weekendStyle: TextStyle(
-                  fontSize: 13,
-                  fontWeight: FontWeight.w600,
-                  fontFamily: 'Poppins',
-                  color: Color.fromRGBO(126, 126, 126, 1)),
+                fontSize: 13,
+                fontWeight: FontWeight.w600,
+                fontFamily: 'Poppins',
+                color: Color.fromRGBO(126, 126, 126, 1),
+              ),
             ),
             calendarStyle: CalendarStyle(
               tablePadding: EdgeInsets.zero,
@@ -176,9 +189,10 @@ class HomeWidg extends StatelessWidget {
                 fontWeight: FontWeight.w700,
               ),
               selectedTextStyle: GoogleFonts.inter(
-                  fontWeight: FontWeight.w700,
-                  fontSize: 21,
-                  color: Colors.black),
+                fontWeight: FontWeight.w700,
+                fontSize: 21,
+                color: Colors.black,
+              ),
               selectedDecoration: BoxDecoration(
                 shape: BoxShape.circle,
                 color: theblue,
@@ -192,16 +206,18 @@ class HomeWidg extends StatelessWidget {
             calendarFormat: CalendarFormat.week,
             rowHeight: 52,
             headerStyle: const HeaderStyle(
-                formatButtonVisible: false,
-                formatButtonShowsNext: false,
-                leftChevronVisible: false,
-                rightChevronVisible: false,
-                titleCentered: false,
-                titleTextStyle: TextStyle(
-                    color: Color.fromRGBO(126, 126, 126, 1),
-                    fontSize: 11,
-                    fontWeight: FontWeight.w600,
-                    fontFamily: 'Poppins')),
+              formatButtonVisible: false,
+              formatButtonShowsNext: false,
+              leftChevronVisible: false,
+              rightChevronVisible: false,
+              titleCentered: false,
+              titleTextStyle: TextStyle(
+                color: Color.fromRGBO(126, 126, 126, 1),
+                fontSize: 11,
+                fontWeight: FontWeight.w600,
+                fontFamily: 'Poppins',
+              ),
+            ),
             focusedDay: _calendarController.focusedDay.value,
             firstDay: DateTime.utc(2005, 01, 15),
             lastDay: DateTime.utc(2035, 01, 01),
@@ -214,8 +230,10 @@ class HomeWidg extends StatelessWidget {
             },
             calendarBuilders: CalendarBuilders(
               defaultBuilder: (context, day, focusedDay) {
-                final isSelectedDay =
-                    isSameDay(_calendarController.selectedDay.value, day);
+                final isSelectedDay = isSameDay(
+                  _calendarController.selectedDay.value,
+                  day,
+                );
                 final isToday = isSameDay(DateTime.now(), day);
 
                 return Container(
@@ -260,6 +278,7 @@ class Controller extends GetxController {
   }
 }
 
+
 class MainPage extends StatelessWidget {
   MainPage({super.key});
   final Controller controller = Get.put(Controller());
@@ -280,35 +299,46 @@ class MainPage extends StatelessWidget {
           showUnselectedLabels: false,
           items: [
             BottomNavigationBarItem(
-                icon: Container(
-                    padding: EdgeInsets.all(10),
-                    decoration: BoxDecoration(
-                        color: controller.selectedIndex.value == 0
-                            ? Color.fromRGBO(129, 212, 254, 0.2)
-                            : Colors.transparent,
-                        shape: BoxShape.circle),
-                    child: Image.asset('Image/home.png')),
-                label: 'Home'),
+              icon: Container(
+                padding: EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  color: controller.selectedIndex.value == 0
+                      ? Color.fromRGBO(129, 212, 254, 0.2)
+                      : Colors.transparent,
+                  shape: BoxShape.circle,
+                ),
+                child:
+                    Image.asset('Image/home.png', height: 25, width: 25),
+              ),
+              label: 'Home',
+            ),
             BottomNavigationBarItem(
-                icon: Container(
-                    padding: EdgeInsets.all(10),
-                    decoration: BoxDecoration(
-                        color: controller.selectedIndex.value == 1
-                            ? Color.fromRGBO(129, 212, 254, 0.2)
-                            : Colors.transparent,
-                        shape: BoxShape.circle),
-                    child: Image.asset('Image/statistics icon.png')),
-                label: 'Home'),
+              icon: Container(
+                padding: EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  color: controller.selectedIndex.value == 1
+                      ? Color.fromRGBO(129, 212, 254, 0.2)
+                      : Colors.transparent,
+                  shape: BoxShape.circle,
+                ),
+                child: Image.asset('Image/statistics icon.png',
+                    height: 25, width: 25),
+              ),
+              label: 'Home',
+            ),
             BottomNavigationBarItem(
-                icon: Container(
-                    padding: EdgeInsets.all(10),
-                    decoration: BoxDecoration(
-                        color: controller.selectedIndex.value == 2
-                            ? Color.fromRGBO(129, 212, 254, 0.2)
-                            : Colors.transparent,
-                        shape: BoxShape.circle),
-                    child: Image.asset('Image/profile.png')),
-                label: 'Home'),
+              icon: Container(
+                padding: EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  color: controller.selectedIndex.value == 2
+                      ? Color.fromRGBO(129, 212, 254, 0.2)
+                      : Colors.transparent,
+                  shape: BoxShape.circle,
+                ),
+                child: Image.asset('Image/profile.png', height: 30, width: 30),
+              ),
+              label: 'Home',
+            ),
           ],
         ),
       ),
@@ -319,9 +349,7 @@ class MainPage extends StatelessWidget {
 class GradientScaffold extends StatelessWidget {
   final Widget child;
 
-  const GradientScaffold({
-    required this.child,
-  });
+  const GradientScaffold({required this.child});
 
   @override
   Widget build(BuildContext context) {
@@ -332,13 +360,97 @@ class GradientScaffold extends StatelessWidget {
           gradient: LinearGradient(
             colors: [
               Color.fromRGBO(255, 255, 255, 1),
-              Color.fromRGBO(188, 235, 255, 1)
+              Color.fromRGBO(188, 235, 255, 1),
             ],
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
           ),
         ),
         child: SafeArea(child: child),
+      ),
+    );
+  }
+}
+
+class backButt extends StatelessWidget {
+  const backButt({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return IconButton(
+      icon: Icon(Icons.arrow_back),
+      onPressed: () => Navigator.pop(context),
+    );
+  }
+}
+
+class topBar extends StatelessWidget {
+  final String img;
+  final String isss;
+  const topBar({required this.img, required this.isss});
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(left: 17, right: 30, top: 20),
+      child: Row(
+        children: [
+          backButt(),
+          Expanded(child: SizedBox(height: 0)),
+          Text(
+            isss,
+            style: GoogleFonts.poppins(
+              fontSize: 20,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+          Expanded(child: SizedBox(height: 0)),
+          Container(
+            height: 20,
+            width: 20,
+            child: Image.asset(img, fit: BoxFit.fill),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class inputField extends StatelessWidget {
+  final String label;
+  final String hint;
+  inputField({required this.label, required this.hint});
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 15),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            label,
+            style: GoogleFonts.poppins(
+              fontSize: 12,
+              color: const Color.fromARGB(255, 93, 93, 93),
+            ),
+          ),
+          SizedBox(height: 9),
+          TextField(
+            decoration: InputDecoration(
+              hintText: hint,
+              hintStyle: TextStyle(fontSize: 12),
+              // disabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(10),borderSide: BorderSide(color: const Color.fromARGB(255, 176, 175, 175))),
+              enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10),
+                borderSide: const BorderSide(
+                  color: const Color.fromARGB(255, 176, 175, 175),
+                ),
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }

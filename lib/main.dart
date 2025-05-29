@@ -1,9 +1,18 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:sit90/calibration.dart';
 import 'package:sit90/charts.dart';
 import 'package:sit90/data.dart';
+import 'package:sit90/instructions.dart';
 import 'package:sit90/pairing.dart';
+import 'package:sit90/profileScreens/profilesett.dart';
+import 'package:sit90/signup.dart';
 import 'package:sit90/start.dart';
+
+import 'login.dart';
+import 'profileScreens/aboutus.dart';
+import 'profileScreens/helppp.dart';
+import 'profileScreens/privacy.dart';
 
 //import 'pairing.dart';
 
@@ -29,19 +38,27 @@ void main() async {
 }
 
 class MyApp extends StatelessWidget {
- const MyApp({super.key});
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        debugShowCheckedModeBanner: false, title: 'Sit90',
-        home: StartPage(),
-        routes: {
+      debugShowCheckedModeBanner: false,
+      title: 'Sit90',
+      home: StartPage(),
+      routes: {
         '/second': (context) => PairingPage(),
         '/home': (context) => MainPage(),
         '/stat': (context) => ChartsPage(),
+        '/login': (context) => LoginPage(),
+        '/signup': (context) => SignUpPage(),
+        '/abtus': (context) => AboutUs(),
+        '/hlp': (context) => Helpp(),
+        '/pr': (context) => Privacy(),
+        '/profilesett' : (context) => Profilesett(),
+        '/calibration' : (context) => CalibrationPage(),
+        '/inst' : (context) => instructionsPage(),
       },
-
-         );
+    );
   }
 }

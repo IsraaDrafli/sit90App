@@ -134,6 +134,21 @@ class ChartsPage extends StatelessWidget {
                     SizedBox(
                       height: 20,
                     ),
+                    Row(
+                      children: [
+                        Text(
+                          'Good Posture Per Day',
+                          style: GoogleFonts.poppins(
+                              fontSize: 18,
+                              fontWeight: FontWeight.w600,
+                              color: Color.fromARGB(255, 114, 184, 246)),
+                        ),
+                        Spacer()
+                      ],
+                    ),
+                    SizedBox(
+                      height: 15,
+                    ),
                     Container(
                         padding: EdgeInsets.symmetric(vertical: 10),
                         decoration: BoxDecoration(

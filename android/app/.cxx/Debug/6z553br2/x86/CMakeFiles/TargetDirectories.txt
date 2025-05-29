@@ -1,0 +1,2 @@
+C:/Users/HP/Desktop/sit90/sit90/android/app/.cxx/Debug/6z553br2/x86/CMakeFiles/edit_cache.dir
+C:/Users/HP/Desktop/sit90/sit90/android/app/.cxx/Debug/6z553br2/x86/CMakeFiles/rebuild_cache.dir

@@ -77,7 +77,7 @@ class CalibrationPage extends StatelessWidget {
                     size: 150,
                   );
                 } else {
-                  return Placeholder();
+                  return Container();
                 }
               })),
               Obx(() {
@@ -154,6 +154,7 @@ class CalibrationPage extends StatelessWidget {
 
 class CalibrationController extends GetxController {
   final databaseRef = FirebaseDatabase.instance.ref();
+  
   var status = "".obs;
 
   @override

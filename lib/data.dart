@@ -148,11 +148,11 @@ class HomeWidg extends StatelessWidget {
             Spacer(),
             IconButton(
               onPressed: () {
-                Navigator.pushNamed(context, '/profile');
+                Get.find<Controller>().changePage(2);
               },
               icon: ClipOval(
                 child: Image.asset(
-                  'image/isradrf.jpg',
+                  'Image/isradrf.jpg',
                   height: 45,
                   width: 45,
                   fit: BoxFit.cover,
@@ -278,7 +278,6 @@ class Controller extends GetxController {
   }
 }
 
-
 class MainPage extends StatelessWidget {
   MainPage({super.key});
   final Controller controller = Get.put(Controller());
@@ -307,8 +306,7 @@ class MainPage extends StatelessWidget {
                       : Colors.transparent,
                   shape: BoxShape.circle,
                 ),
-                child:
-                    Image.asset('Image/home.png', height: 25, width: 25),
+                child: Image.asset('Image/home.png', height: 25, width: 25),
               ),
               label: 'Home',
             ),
@@ -392,7 +390,7 @@ class topBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(left: 17, right: 30, top: 20),
+      padding: const EdgeInsets.only(left: 17, right: 28, top: 20),
       child: Row(
         children: [
           backButt(),

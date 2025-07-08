@@ -8,7 +8,6 @@ import 'package:sit90/pairing.dart';
 import 'package:sit90/profileScreens/profilesett.dart';
 import 'package:sit90/signup.dart';
 import 'package:sit90/start.dart';
-
 import 'login.dart';
 import 'profileScreens/aboutus.dart';
 import 'profileScreens/helppp.dart';
@@ -58,6 +57,7 @@ class MyApp extends StatelessWidget {
         '/profilesett' : (context) => Profilesett(),
         '/calibration' : (context) => CalibrationPage(),
         '/inst' : (context) => instructionsPage(),
+        
       },
     );
   }

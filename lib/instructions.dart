@@ -8,6 +8,7 @@ import 'data.dart';
 class instructionsPage extends StatelessWidget {
   final PageController _pageController = PageController();
   final ValueNotifier<int> _currentPage = ValueNotifier<int>(0);
+  final CalibrationController controller = Get.put(CalibrationController());
 
   final List<Map<String, String>> _steps = const [
     {
@@ -142,9 +143,7 @@ class instructionsPage extends StatelessWidget {
                   },
                 ),
               ),
-          
-             
-          
+
               // Next button
              ValueListenableBuilder<int>(
   valueListenable: _currentPage,
@@ -154,6 +153,7 @@ class instructionsPage extends StatelessWidget {
       () {
         if (isLastPage) {
           Navigator.pushNamed(context, '/calibration');
+          controller.startCalibration();
         } else {
           _pageController.nextPage(
             duration: const Duration(milliseconds: 300),

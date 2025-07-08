@@ -2,6 +2,7 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'dart:async';
 
 class PostureController extends GetxController {
   final DatabaseReference _database = FirebaseDatabase.instance.ref();
@@ -17,6 +18,7 @@ class PostureController extends GetxController {
   var todayGoodPercentage = 0.0.obs;
   var todayesterdayPercentage = 0.0.obs;
   bool up = true;
+  Timer? _timer;
 
   Future<void> fetchWeeklyProgress() async {
     int totalMinutesInWeek = 0;
@@ -97,14 +99,16 @@ class PostureController extends GetxController {
     }
     if (yesterdayTotalMin > 0) {
       if (todayTotalMinutes.value >= yesterdayTotalMin.value) {
-        todayesterdayPercentage.value =
-            (yesterdayTotalMin.value / todayTotalMinutes.value) * 100;
-
+        todayesterdayPercentage.value = double.parse(
+          ((yesterdayTotalMin.value / todayTotalMinutes.value) * 100)
+              .toStringAsFixed(2),
+        );
         up = true;
       } else {
-        todayesterdayPercentage.value =
-            (todayTotalMinutes.value / yesterdayTotalMin.value) * 100;
-
+        todayesterdayPercentage.value = double.parse(
+          ((todayTotalMinutes.value / yesterdayTotalMin.value) * 100)
+              .toStringAsFixed(2),
+        );
         up = false;
       }
     } else {
@@ -123,7 +127,7 @@ class PostureController extends GetxController {
       postureStatement1.value = "Good";
       postureStatement2.value = "Keep it up!";
     } else if (todayGoodPercentage.value >= 40.0) {
-      postureStatement1.value = "Needs Improvement";
+      postureStatement1.value = "Fair";
       postureStatement2.value = "Stay Focused!";
     } else {
       postureStatement1.value = "Poor";
@@ -135,6 +139,16 @@ class PostureController extends GetxController {
   void onInit() {
     super.onInit();
     fetchWeeklyProgress();
+    // Auto-refresh every 60 seconds
+    _timer = Timer.periodic(Duration(seconds: 60), (timer) {
+      fetchWeeklyProgress();
+    });
+  }
+
+  @override
+  void onClose() {
+    _timer?.cancel();
+    super.onClose();
   }
 
   String formatMinutes(int totalMinutes) {

@@ -1,21 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../Auth/authController.dart';
+
 class ProfileScreen extends StatelessWidget {
-  const ProfileScreen({super.key});
+   ProfileScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: const Color(0xFFF7F7F7),
-      body: Stack(
-        children: [
-          bluecon(),
-          Padding(
-            padding: const EdgeInsets.only(top: 200),
-            child: settingsw(),
-          )
-        ],
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: const Color(0xFFF7F7F7),
+        body: Stack(
+          children: [
+            bluecon(),
+            Padding(
+              padding: const EdgeInsets.only(top: 200),
+              child: settingsw(),
+            )
+          ],
+        ),
       ),
     );
   }
@@ -38,7 +42,7 @@ class settingsw extends StatelessWidget {
           borderRadius: BorderRadius.circular(15),
         ),
         child: Column(
-          children: const [
+          children:  [
             Align(
                 alignment: Alignment.topLeft,
                 child: Padding(
@@ -72,12 +76,45 @@ class settingsw extends StatelessWidget {
               backgroundColor: Color(0xFFFFF6FF),
               rue: '/abtus',
             ),
-            ListItem(
+           /* ListItem(
               icon: 'Image/logout.png',
               text: 'Log Out',
               backgroundColor: Color(0xFFFFF5F5),
               rue: '/login',
+            ),*/
+             Padding(
+      padding:  EdgeInsets.only(top: 2),
+      child: ListTile(
+        leading: InkWell(
+          child: Container(
+            width: 27,
+            height: 27,
+            decoration: BoxDecoration(
+              color: Color(0xFFFFF5F5),
+              borderRadius: BorderRadius.circular(10),
             ),
+            child: Center(
+              child: Image.asset(
+                'Image/logout.png',
+                width: 20,
+                height: 20,
+                fit: BoxFit.contain,
+              ),
+            ),
+          ),
+        ),
+        title: Text(
+          "Log Out",
+          style: GoogleFonts.poppins(fontSize: 18, fontWeight: FontWeight.w500),
+        ),
+        trailing: const Icon(Icons.arrow_forward_ios, size: 16),
+        onTap: () async {
+        await AuthService().signout( 
+          context: context
+        );
+      },
+      ),
+    )
           ],
         ),
       ),

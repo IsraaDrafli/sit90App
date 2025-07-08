@@ -30,6 +30,7 @@ class StartPage extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
+                    SizedBox(height: MediaQuery.of(context).size.height * 0.05),
                     Text.rich(TextSpan(children: [
                       TextSpan(
                         text: 'Sit',
@@ -44,7 +45,7 @@ class StartPage extends StatelessWidget {
                             color: Colors.white),
                       )
                     ])),
-                    SizedBox(height: 25),
+                    SizedBox(height: MediaQuery.of(context).size.height * 0.14),
                     Text(
                       textAlign: TextAlign.center,
                       'Daily support for lifelong posture health',
@@ -55,22 +56,23 @@ class StartPage extends StatelessWidget {
                     ),
                     Spacer(),
                     SetButton(() async {
-  final user = FirebaseAuth.instance.currentUser;
-  if (user != null) {
-    // User is logged in
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (_) => PairingPage()),
-    );
-  } else {
-    // User is not logged in
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (_) => LoginPage()),
-    );
-  }
-}, 'Get started')
-
+                      final user = FirebaseAuth.instance.currentUser;
+                      if (user != null) {
+                        // User is logged in
+                      final currentStatus = controller.status.value;
+                      if(currentStatus == "success"){
+                         Navigator.pushNamed(context, '/home');
+                      }else{
+                        Navigator.pushNamed(context, '/second');
+                      }
+                      } else {
+                        // User is not logged in
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (_) => LoginPage()),
+                        );
+                      }
+                    }, 'Get started')
                   ],
                 ),
               ),

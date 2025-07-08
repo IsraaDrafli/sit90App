@@ -137,7 +137,7 @@ class ChartsPage extends StatelessWidget {
                     Row(
                       children: [
                         Text(
-                          'Good Posture Per Day',
+                          'Minutes of Proper Posture by Day',
                           style: GoogleFonts.poppins(
                               fontSize: 18,
                               fontWeight: FontWeight.w600,

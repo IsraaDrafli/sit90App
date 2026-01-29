@@ -1,6 +1,7 @@
 # sit90
 
-A new Flutter project.
+The Sit-90 Flutter App is a mobile application designed to display posture-related data collected from a wearable posture correction device.
+The app provides a simple and user-friendly interface that allows users to monitor their sitting posture in real time and receive visual feedback to encourage healthier posture habits..
 
 ## Getting Started
 
